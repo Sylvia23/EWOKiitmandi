@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<style type="text/css">
+		* {
+			text-align: left;
+			padding-bottom: 0.8%;
+			margin-top: 1%;
+		/*	left : 1%;*/
+		/*	margin-left : 10%;*/
+		}
+
+		label {
+
+		}
+
+		input {
+			left : 10%;
+		}
+	</style>
+<body>
+		<h1>Hey ! Welcome to EWOK</h1>
+		<h2>Login Here</h2>
+
+		<form action = "logged.php" method = "POST">
+
+		<label for="phonenum"><b>Phone Number (Username)</b></label>
+	  	<input id="phonenum" type="tel" placeholder="Enter Phone Number" pattern="^\d{4}-\d{3}-\d{4}$" required >
+	  	</br>
+
+	  	<label><b>Password</b></label>
+	  	<input type="password" placeholder="Enter Password" name="psw" required>
+	  	</br>
+
+    	<button type="button" class="cancelbtn">Cancel</button>
+    	<button type="submit" class="signupbtn">Login</button>
+
+    	</form>
+
+</body>
+</html>

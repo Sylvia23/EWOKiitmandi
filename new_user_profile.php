@@ -2,27 +2,75 @@
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<title>Register Here</title>
+		<title>Fill Profile</title>
 
-		<style type="text/css">
-			.regform{
+	<!-- 	<style type="text/css">
+			* {
+				/*overflow-x: hidden;*/
 				text-align: left;
-				margin-left: 30%;		
+				margin-left: 2%;
+			}
+
+			/*.regform{
+				text-align: left;
+				margin-left: 10%;		
 				padding : 1%;
+			}*/
+
+			label{
+				left : 20%;
+				/*margin-left: 10%;
+				position: absolute;*/
+				/*padding-right: 10%;*/
+				padding: 8px 16px;
+			    margin: 8px 0;
+			    display: inline-block;
+			    /*border: 1px solid #ccc;*/
+			    box-sizing: border-box;
+
 			}
 
-			.label{
-				padding-right: 20%;
+			input[type=text], input[type=tel], select {
+				position: absolute;
+				width: 40%;
+				left: 35%;
+				text-align: center;
+			    padding: 8px 16px;
+			    margin: 8px 0;
+			    display: inline-block;
+			    border: 1px solid #ccc;
+			    box-sizing: border-box;
 			}
 
-			.label, .input {
+			button {
+				width: 50%;
+				text-align: center;
+				padding: 8px 16px;
+			    margin: 8px 0;
+			    display: inline-block;
+			    border: 1px solid #ccc;
+			    box-sizing: border-box;
+			}
+
+			.radio {
+				padding: 1%;
 
 			}
-		</style>
+
+			.radio.input {
+				padding: 10%;
+			}
+
+			dob.select {
+				width: 2%;
+			}
+		</style> -->
 	</head>
 	<body>
-			<h1 style="text-align: center;">Register Here</h1>
+			<h1 style="text-align: center;">More About You !</h1>
+			<h2 style="text-align: center;">Fill your Profile</h2>
 
+		<form action = "registered.php" method = "POST">
 		<div class="regform">
 			<label for="name"><b>Name</b></label>
 			<input type="text" name="name" placeholder="Enter Name" required>	
@@ -37,15 +85,17 @@
 			<input type="radio" name="gender" value="female" checked="">Female
 
 			</br>
+			<div class="radio">
 			<label for="gender"><b>Martial Status</b></label>
 			<input type="radio" name="martial" value="married">Married
 			<input type="radio" name="martial" value="unmarried">Unmarried
 			<input type="radio" name="martial" value="widow">Widow
 			<input type="radio" name="martial" value="unmarried">Divorce/Separated
+			</div>
 
 			</br>
-			//if (married == true)
-			<label><b>Enter Husband's Name</b></label>
+			
+			<label><b>Enter Husband's Name</b></label>//if (married == true)
 			<input type="text" name="husband" placeholder="Enter Husband's Name">
 			
 			</br>
@@ -54,6 +104,7 @@
 
 	  		</br>
 	  		<label><b>Date of Birth</b></label>
+	  		<div class="dob">
 	  		<select name="DOBMonth">
 				<option> - Month - </option>
 				<option value="January">January</option>
@@ -167,6 +218,7 @@
 				<option value="1948">1948</option>
 				<option value="1947">1947</option>
 			</select>
+			</div>
 
 			</br>
 			<label><b>Education Status</b></label>
@@ -237,9 +289,10 @@
 			<label><b>Description</b></label>
 			<textarea rows="4" cols="50" name="description" form="usrform">Write Description Here.</textarea>
 
-	  	</div>
-
-
-			<input type="button" onclick="alert('Thanks for Registering! Welcome to EWOK.')" value="Submit" style="margin-left: 43%;"> 
+			</br></br>
+			<button type="Submit">Submit</button>
+			
+	  	</div> 
+		</form>
 	</body>
 	</html>
