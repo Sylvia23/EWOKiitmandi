@@ -1,133 +1,29 @@
-<?php
-
-	session_start();
-
-
-    $con = mysqli_connect('127.0.0.1','sylvia');
-
-    if (mysqli_connect_errno())
-    {
-      echo "Failed to connect to MySQL: " . mysqli_connect_error();
-      //you need to exit the script, if there is an error
-      exit();
-    }
-  	if(!$con)
-  	{
-  		echo 'Not connected to server';
-  	}
-    else {
-      echo 'Connected';
-    }
-
-  	if(!mysqli_select_db($con, 'essp'))
-  	{
-  		echo 'Database not selected';
-  	}
-
- //  	$UserId = value_of_auto_increment_field();
-	// $_SESSION['UserId'] = $UserId;
-  	$Username = $_POST['phonenum'];
-
-  	$Password = $_POST['psw'];
-  	$encPW = MD5('$Password');
-  	// $escapedPW = mysql_real_escape_string($_POST['psw']);
-  	// $salt = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
-  	// $saltedPW =  $escapedPW . $salt;
-  	// $hashedPW = hash('sha256', $saltedPW);
-
-
-  	$sql = "INSERT INTO users (Username,Password,UPDATED_BY) VALUES ('$Username','$encPW','$Username')";
-
-  	if(!mysqli_query($con, $sql))
-  	{
-  		error_log ('Error! Not Inserted. Error description: ' . mysqli_error($con), 0);	
-  	}
-  	else
-  	{
-  		echo 'Congrats! Successfully Registered.';
-  	}
-
-  	// header ("refresh:5; url=register.html");
-
-  ?>
-
-
-  
-
-
-  	<!DOCTYPE html>
+	<!DOCTYPE html>
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<title>Fill Profile</title>
+		<title>Register Here</title>
 
-	<!-- 	<style type="text/css">
-			* {
-				/*overflow-x: hidden;*/
+		<style type="text/css">
+			.regform{
 				text-align: left;
-				margin-left: 2%;
-			}
-
-			/*.regform{
-				text-align: left;
-				margin-left: 10%;		
+				margin-left: 30%;		
 				padding : 1%;
-			}*/
-
-			label{
-				left : 20%;
-				/*margin-left: 10%;
-				position: absolute;*/
-				/*padding-right: 10%;*/
-				padding: 8px 16px;
-			    margin: 8px 0;
-			    display: inline-block;
-			    /*border: 1px solid #ccc;*/
-			    box-sizing: border-box;
-
 			}
 
-			input[type=text], input[type=tel], select {
-				position: absolute;
-				width: 40%;
-				left: 35%;
-				text-align: center;
-			    padding: 8px 16px;
-			    margin: 8px 0;
-			    display: inline-block;
-			    border: 1px solid #ccc;
-			    box-sizing: border-box;
+			.label{
+				padding-right: 20%;
 			}
 
-			button {
-				width: 50%;
-				text-align: center;
-				padding: 8px 16px;
-			    margin: 8px 0;
-			    display: inline-block;
-			    border: 1px solid #ccc;
-			    box-sizing: border-box;
-			}
-
-			.radio {
-				padding: 1%;
+			.label, .input {
 
 			}
-
-			.radio.input {
-				padding: 10%;
-			}
-
-			dob.select {
-				width: 2%;
-			}
-		</style> -->
+		</style>
 	</head>
 	<body>
-			<h1 style="text-align: center;">More About You !</h1>
-			<h2 style="text-align: center;">Fill your Profile</h2>
+			<h1 style="text-align: center;">Register Here</h1>
 
-		<form action = "registered.php" method = "POST" enctype="multipart/form-data">
+		<form action = "registered.php" method = "POST">
 		<div class="regform">
 			<label for="name"><b>Name</b></label>
 			<input type="text" name="name" placeholder="Enter Name" required>	
@@ -138,30 +34,27 @@
 
 			</br>
 			<label for="gender"><b>Gender</b></label>
-			<input type="radio" name="gender" value="m">Male
-			<input type="radio" name="gender" value="f" checked="">Female
+			<input type="radio" name="gender" value="male">Male
+			<input type="radio" name="gender" value="female" checked="">Female
 
 			</br>
-			<div class="radio">
-			<label for="marital"><b>Marital Status</b></label>
-			<input type="radio" name="marital" value="married">Married
-			<input type="radio" name="marital" value="unmarried">Unmarried
-			<input type="radio" name="marital" value="widow">Widow
-			<input type="radio" name="marital" value="unmarried">Divorce/Separated
-			</div>
+			<label for="gender"><b>Martial Status</b></label>
+			<input type="radio" name="martial" value="married">Married
+			<input type="radio" name="martial" value="unmarried">Unmarried
+			<input type="radio" name="martial" value="widow">Widow
+			<input type="radio" name="martial" value="unmarried">Divorce/Separated
 
 			</br>
-			
-			<label><b>Enter Husband's Name</b></label>//if (married == true)
+			//if (married == true)
+			<label><b>Enter Husband's Name</b></label>
 			<input type="text" name="husband" placeholder="Enter Husband's Name">
 			
 			</br>
 			<label for="phonenum"><b>Phone Number</b></label>
-	  		<input id="phonenum" type="text" placeholder="Enter Phone Number" name="phonenum" required >
+	  		<input id="phonenum" type="tel" placeholder="Enter Phone Number" pattern="^\d{4}-\d{3}-\d{4}$" required >
 
 	  		</br>
 	  		<label><b>Date of Birth</b></label>
-	  		<div class="dob">
 	  		<select name="DOBMonth">
 				<option> - Month - </option>
 				<option value="January">January</option>
@@ -275,7 +168,6 @@
 				<option value="1948">1948</option>
 				<option value="1947">1947</option>
 			</select>
-			</div>
 
 			</br>
 			<label><b>Education Status</b></label>
@@ -339,20 +231,15 @@
 
 			</br>
 			<label><b>Uplaod Photos</b></label>
-			<!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
-			    Select image to upload:
-			    <input type="file" name="fileToUpload" id="fileToUpload">
-			    <input type="submit" value="Upload Image" name="submit">
-			<!-- </form> -->
+			<input type="file" name="photoupload" value="photoupload" id="photoupload">
+			<input type="submit" name="submit" value="Submit">
 
 			</br>
 			<label><b>Description</b></label>
-			<input type="text" name="description" placeholder="Write Description Here.">
-			<!-- <textarea rows="4" cols="50" name="description" form="usrform">Write Description Here.</textarea> -->
-
+			<textarea rows="4" cols="50" name="description" form="usrform">Write Description Here.</textarea>
 
 			</br></br>
-			<button type="Submit">Submit</button>
+			<button type="Submit" style="margin-left: 26%">Submit</button>
 			
 	  	</div> 
 		</form>

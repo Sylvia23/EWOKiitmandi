@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +28,7 @@
 		<form action = "new_user_profile.php" method = "POST">
 
 		<label for="phonenum"><b>Phone Number (Username)</b></label>
-	  	<input id="phonenum" type="tel" placeholder="Enter Phone Number" pattern="^\d{4}-\d{3}-\d{4}$" required >
+	  	<input id="phonenum" type="text" placeholder="Enter Phone Number" name="phonenum" required >
 	  	</br>
 
 	  	<label><b>Password</b></label>
@@ -37,9 +40,13 @@
     	</br>
 
     	<button type="button" class="cancelbtn">Cancel</button>
-    	<button type="submit" class="signupbtn" href="new_use_profile.php">Register</button>
+    	<button type="submit" class="signupbtn">Register</button>
 
     	</form>
+
+
+
+
 
 </body>
 </html>

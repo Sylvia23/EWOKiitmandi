@@ -1,0 +1,5 @@
+show databases;
+
+use essp;
+
+ create table users (UserId INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, Username varchar(50) NOT NULL, Password varchar(20) NOT NULL, UPDATED_BY VARCHAR(50) not null, UPDATED_ON TIMESTAMP);

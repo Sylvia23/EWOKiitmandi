@@ -1,0 +1,11 @@
+show databases;
+
+create database essp;
+
+use essp;
+
+create table profiles (ProfileId int unsigned not null auto_increment primary key, UserId int unsigned NOT NULL FOREIGN KEY (UserId) REFRENCES users(UserId), Name varchar(50) not null, FatherName varchar(50), Gender varchar(1) not null, MartialStatus varchar(10), HusbandName varchar(50), PhoneNum varchar(15) UNIQUE not null, DOB DATE, EducationStatus varchar(100), Address varchar(500), State varchar(20) not null, District varchar(20) not null, Village varchar(20) not null, Profession varchar(20), OtherSkills varchar(20), Description varchar(1000), Updated_by varchar(50) not null, Updated_on TIMESTAMP not null);
+
+create table profiles (ProfileId int unsigned not null auto_increment primary key, UserId int unsigned NOT NULL, Name varchar(50) not null, FatherName varchar(50), Gender varchar(1) not null, MartialStatus varchar(10), HusbandName varchar(50), PhoneNum varchar(15) UNIQUE not null, DOB DATE, EducationStatus varchar(100), Address varchar(500), State varchar(20) not null, District varchar(20) not null, Village varchar(20) not null, Profession varchar(20), OtherSkills varchar(20), Description varchar(1000), Updated_by varchar(50) not null, Updated_on TIMESTAMP not null);
+
+alter table profiles add constraint FOREIGN KEY (UserId) References users(UserId);
