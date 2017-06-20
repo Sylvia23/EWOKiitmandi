@@ -25,10 +25,15 @@
     }
 
 
+
+    $qryid = $_SESSION['UserId'];
+    echo $qryid;
+    
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    //$UserId = $_SESSION['UserId'];
 
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) 
@@ -72,6 +77,7 @@
     // Check if $uploadOk is set to 0 by an error
     //$upload_image = "uploads/$_FILES["fileToUpload"]["name"]";
 
+
     if ($uploadOk == 0)
     {
          echo "Sorry, your file was not uploaded.";
@@ -82,19 +88,20 @@
     {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
         {        
-    		echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+            echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 
-            $sql = 'INSERT INTO photos(UserId, Location, Updated_by) VALUES(1,"uploads/' . $_FILES["fileToUpload"]["name"] . '", 1)';
-    		//$sql = 'INSERT into users values ("uploads/$_FILES["fileToUpload"]["name"])';
-    		$con->query($sql);
+        $sqli = 'INSERT INTO photos(UserID, Location, Updated_by) VALUES ('.$qryid.',"uploads/' . $_FILES["fileToUpload"]["name"] . '",'.$qryid .')';
+            //$sqli = 'INSERT into users values ("uploads/$_FILES["fileToUpload"]["name"])';
+        //echo $sqli;
+            $con->query($sqli);
 
-    	} 
+        error_log ('Error! Not Inserted. Error description: ' . mysqli_error($con), 0);
+
+        } 
         else 
         {
             echo "Sorry, there was an error uploading your file.";
         }
     }
-
-
 //$conn->close();
 ?>

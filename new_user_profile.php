@@ -14,6 +14,7 @@
   	if(!$con)
   	{
   		echo 'Not connected to server';
+  		exit();	
   	}
     else {
       echo 'Connected';
@@ -22,6 +23,7 @@
   	if(!mysqli_select_db($con, 'essp'))
   	{
   		echo 'Database not selected';
+  		exit();
   	}
 
  //  	$UserId = value_of_auto_increment_field();
@@ -29,23 +31,42 @@
   	$Username = $_POST['phonenum'];
 
   	$Password = $_POST['psw'];
-  	$encPW = MD5('$Password');
+  	$encPW = MD5($Password);
   	// $escapedPW = mysql_real_escape_string($_POST['psw']);
   	// $salt = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
   	// $saltedPW =  $escapedPW . $salt;
   	// $hashedPW = hash('sha256', $saltedPW);
 
+  	$RePassword = $_POST['psw-repeat'];
 
-  	$sql = "INSERT INTO users (Username,Password,UPDATED_BY) VALUES ('$Username','$encPW','$Username')";
+  	if ($Password != $RePassword)
+	{
+	    echo("Oops! Password did not match! Try again. ");
+	    error_log ('Error! Not Inserted. Error description: ' . mysqli_error($con), 0);
+	    exit();
+	}
 
-  	if(!mysqli_query($con, $sql))
-  	{
-  		error_log ('Error! Not Inserted. Error description: ' . mysqli_error($con), 0);	
+	else
+	{
+
+	  	$sql = "INSERT INTO users (Username,Password,UPDATED_BY) VALUES ('$Username','$encPW','$Username')";
+
+	  	if(!mysqli_query($con, $sql))
+	  	{
+	  		error_log ('Error! Not Inserted. Error description: ' . mysqli_error($con), 0);	
+	  	}
+	  	else
+	  	{
+	  		echo 'Congrats! Successfully Registered.';
+	  	}
+
   	}
-  	else
-  	{
-  		echo 'Congrats! Successfully Registered.';
-  	}
+
+  	 $UserId = "SELECT UserId FROM users WHERE Username = '$Username'"; 
+  	 $resultid = mysqli_query($con, $UserId);
+  	 $UserId = $resultid -> fetch_assoc()["UserId"];
+  	 $_SESSION['UserId'] = $UserId;
+  	 echo $UserId;
 
   	// header ("refresh:5; url=register.html");
 
@@ -148,6 +169,7 @@
 			<input type="radio" name="marital" value="unmarried">Unmarried
 			<input type="radio" name="marital" value="widow">Widow
 			<input type="radio" name="marital" value="unmarried">Divorce/Separated
+			<input type="radio" name="marital" value="others" checked="">Others
 			</div>
 
 			</br>

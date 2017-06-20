@@ -1,47 +1,55 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Registered</title>
-	<style type="text/css">
-		* {
-			text-align: center;
-		}
+<?php
+	
+	session_start();
 
-		.h1 {
-			
-		}
+	$con = mysqli_connect('127.0.0.1','sylvia');
 
-		.h2 {
-			
-		}
-	</style>
-</head>
-<body>
-		<h1>Hello <?php echo $_POST["name"];?> !</h1>
-		<h2>Welcome to your EWOK Profile .</h2>
+    if (mysqli_connect_errno())
+    {
+      echo "Failed to connect to MySQL: " . mysqli_connect_error();
+      //you need to exit the script, if there is an error
+      exit();
+    }
+  	if(!$con)
+  	{
+  		echo 'Not connected to server';
+  		exit();	
+  	}
+    else {
+      echo 'Connected';
+    }
 
-		Your username is <?php echo $_POST["phonenum"];?></br>
+  	if(!mysqli_select_db($con, 'essp'))
+  	{
+  		echo 'Database not selected';
+  		exit();
+  	}
 
-		<p>Name : <?php echo $_POST["name"];?> </p>
-		<p>Father's Name : <?php echo $_POST["father"];?></p>
-		<p>Gender : <?php echo $_POST["gender"];?></p>		
-		<p>Martial Status : <?php echo $_POST["martial"];?></p>			 
-		<p>Husband's Name : <?php echo $_POST["husband"];?> </p>			 
-		<p>Phone Number : <?php echo $_POST["phonenum"];?></p>			
-		<p>Date of Birth : <?php echo $_POST["DOBDay"];?> - <?php echo $_POST["DOBMonth"];?> - <?php echo $_POST["DOBYear"];?></p>					
-		<p>Education Status : <?php echo $_POST["education"];?></p>			
-		<p>Address : <?php echo $_POST["address"];?></p>			
-		<p>State : <?php echo $_POST["state"];?></p>			
-		<p>City : <?php echo $_POST["city"];?></p>			
-		<p>Village : <?php echo $_POST["village"];?></p>			
-		<p>Profession : <?php echo $_POST["pro"];?></p>			
-		<p>Other Skills : <?php echo $_POST["skills"];?> </p>			
-		<p>Description : <?php echo $_POST["Description"];?></p>			
-					 
-		<a href="#"> Change Password</a>
-					
-		
+  	$qryid = $_SESSION["UserId"];
+  	echo $qryid;
+  	
+  	$qryname = mysqli_query($con, "SELECT Name FROM profiles WHERE UserId = '".$qryid."'");
+	$qryname = $qryname->fetch_assoc()["Name"];
 
-</body>
-</html>
+	$qrygender = mysqli_query($con, "SELECT Gender FROM profiles WHERE UserId = '".$qryid."'");
+	$qrygender = $qryname->fetch_assoc()["Gender"];
+
+	$qryvillage =  mysqli_query($con, "SELECT Village FROM profiles WHERE UserId = '".$qryid."'");
+	$qryvillage = $qryname->fetch_assoc()["village"];
+
+	$qrydistrict = mysqli_query($con, "SELECT District FROM profiles WHERE UserId = '".$qryid."'");
+	$qrydistrict = $qryname->fetch_assoc()["District"];
+
+	$qrystate = mysqli_query($con, "SELECT State FROM profiles WHERE UserId = '".$qryid."'");
+	$qrystate = $qryname->fetch_assoc()["State"];
+
+	$qrypro = mysqli_query($con, "SELECT Profession FROM profiles WHERE UserId = '".$qryid."'");
+	$qrypro = $qryname->fetch_assoc()["Profession"];
+
+	$qryskills = mysqli_query($con, "SELECT OtherSkills FROM profiles WHERE UserId = '".$qryid."'");
+	$qryskills = $qryname->fetch_assoc()["OtherSkills"];
+
+	$qrydesc = mysqli_query($con, "SELECT Description FROM profiles WHERE UserId = '".$qryid."'");
+	$qrydesc = $qryname->fetch_assoc()["Description"];
+
+?>

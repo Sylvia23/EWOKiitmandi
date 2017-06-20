@@ -11,6 +11,15 @@
 		/*	margin-left : 10%;*/
 		}
 
+		a.button {
+	    -webkit-appearance: button;
+	    -moz-appearance: button;
+	    appearance: button;
+
+	    text-decoration: none;
+	    color: initial;
+		}
+
 		label {
 
 		}
@@ -23,17 +32,17 @@
 		<h1>Hey ! Welcome to EWOK</h1>
 		<h2>Login Here</h2>
 
-		<form action = "logged.php" method = "POST">
+		<form action = "logged1.php" method = "POST">
 
 		<label for="phonenum"><b>Phone Number (Username)</b></label>
-	  	<input id="phonenum" type="tel" placeholder="Enter Phone Number" pattern="^\d{4}-\d{3}-\d{4}$" required >
+	  	<input id="phonenum" type="text" name = "phonenum" placeholder="Enter Phone Number"  required >
 	  	</br>
 
 	  	<label><b>Password</b></label>
 	  	<input type="password" placeholder="Enter Password" name="psw" required>
 	  	</br>
 
-    	<button type="button" class="cancelbtn">Cancel</button>
+    	<a href="index.html" class="button">Cancel</a>
     	<button type="submit" class="signupbtn">Login</button>
 
     	</form>

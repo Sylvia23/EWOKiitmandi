@@ -23,8 +23,9 @@
   		echo 'Database not selected';
   	}
 
-  	// $UserId = $_SESSION['UserId'];
-  	$Name = $_POST['name'];
+  $UserId = $_SESSION['UserId'];
+  //echo $UserId;
+  $Name = $_POST['name'];
 	$FatherName = $_POST['father'];
 	$Gender = $_POST['gender']; 
 	$MaritalStatus = $_POST['marital']; 
@@ -54,7 +55,7 @@
 	// $id = mysqli_query($qry);
 	// $num_rows = mysqli_num_rows($id);
 
-  	$sql = "INSERT INTO profiles (UserId, Name, FatherName, Gender, MaritalStatus, HusbandName, PhoneNum, DOB, EducationStatus, Address, State, District, Village, Profession, OtherSkills, Description, Updated_by) VALUES (1, '$Name', '$FatherName', '$Gender', '$MaritalStatus', '$HusbandName', '$PhoneNum', '$DOB', '$EducationStatus', '$Address', '$State', '$District', '$Village', '$Profession', '$OtherSkills', '$Description', '$Updated_by')";
+  	$sql = "INSERT INTO profiles (UserId, Name, FatherName, Gender, MaritalStatus, HusbandName, PhoneNum, DOB, EducationStatus, Address, State, District, Village, Profession, OtherSkills, Description, Updated_by) VALUES ('$UserId', '$Name', '$FatherName', '$Gender', '$MaritalStatus', '$HusbandName', '$PhoneNum', '$DOB', '$EducationStatus', '$Address', '$State', '$District', '$Village', '$Profession', '$OtherSkills', '$Description', '$Updated_by')";
 
   	// if ($num_rows > 0) {
 
@@ -76,6 +77,7 @@
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    //$UserId = $_SESSION['UserId'];
 
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) 
@@ -119,6 +121,8 @@
     // Check if $uploadOk is set to 0 by an error
     //$upload_image = "uploads/$_FILES["fileToUpload"]["name"]";
 
+    echo $UserId;
+
     if ($uploadOk == 0)
     {
          echo "Sorry, your file was not uploaded.";
@@ -131,9 +135,12 @@
         {        
     		echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 
-            $sqli = 'INSERT INTO photos(UserId, Location, Updated_by) VALUES(1,"uploads/' . $_FILES["fileToUpload"]["name"] . '", 1)';
+        $sqli = 'INSERT INTO photos(UserID, Location, Updated_by) VALUES ('.$UserId.',"uploads/' . $_FILES["fileToUpload"]["name"] . '",'.$UserId.')';
     		//$sqli = 'INSERT into users values ("uploads/$_FILES["fileToUpload"]["name"])';
+        //echo $sqli;
     		$con->query($sqli);
+
+        error_log ('Error! Not Inserted. Error description: ' . mysqli_error($con), 0);
 
     	} 
         else 
